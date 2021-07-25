@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Support\Facades\Schema;  //dbせってい
+use Illuminate\Support\Facades\URL;    //この行を追加 [本のため]
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,5 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Schema::defaultStringLength(191); //dbせってい
+        URL::forceScheme('https');          //boot()内に、この行を追加 [本のため]
     }
 }
