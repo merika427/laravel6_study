@@ -26,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191); //dbせってい
-        URL::forceScheme('https');          //boot()内に、この行を追加 [本のため]
+        // URL::forceScheme('https');          //boot()内に、この行を追加 [本のため] //vagrant環境の場合sslだとうまくいかないためコメントアウト
     }
 }
