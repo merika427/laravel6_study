@@ -22,6 +22,27 @@
                 </div>
             </div>
 
+            <!-- ↓課題1.1 p152↓ -->
+            <div class="form-group">
+            <label class="card-title" for="item_number">冊数</div>               
+                <div class="col-sm-6">
+                    <input type="text" name="item_number" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+            <label class="card-title" for="item_amount">金額</div> 
+                <div class="col-sm-6">
+                    <input type="text" name="item_amount" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="card-title" for="published">本公開日</div> 
+                <div class="col-sm-6">
+                    <input type="date" name="published" class="form-control">
+                </div>
+            </div>                             
+            <!-- ↑課題1.1 p152↑ -->
+
             <!-- 本 登録ボタン -->
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
@@ -51,6 +72,28 @@
                                 <td class="table-text">
                                     <div>{{ $book->item_name }}</div>
                                 </td>
+                                <!-- ↓課題1.1 p152↓ -->
+                                <td class="table-text">
+                                    <div>{{ $book->item_number }}</div>
+                                </td>                                
+                                <td class="table-text">
+                                    <div>{{ $book->item_amount }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $book->published }}</div>
+                                </td>
+ 
+                                <!-- 本: 更新ボタン -->
+                                <td>
+                                    <form action="{{ url('booksedit/'.$book->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary">
+                                            更新
+                                        </button>
+                                    </form>
+                                </td>                                
+
+                                <!-- ↑課題1.1 p152↑ -->
 
                                 <!-- 本: 削除ボタン -->
                                 <td>
