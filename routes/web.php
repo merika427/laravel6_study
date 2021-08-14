@@ -20,13 +20,16 @@ use Illuminate\Http\Request;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {
-    $books = Book::orderBy('created_at', 'asc')->get();
-    return view('books', [
-        'books' => $books
-    ]);
-    //return view('books',compact('books')); //も同じ意味
-});
+// Route::get('/', function () {
+//     $books = Book::orderBy('created_at', 'asc')->get();
+//     return view('books', [
+//         'books' => $books
+//     ]);
+//     //return view('books',compact('books')); //も同じ意味
+// });
+//本ダッシュボード表示
+Route::get('/', 'BooksController@index');
+
 Route::get('contact', 'BooksController@contact');
 
 /**
@@ -67,19 +70,21 @@ Route::post('/books','BooksController@store');
 /**
 * 本を削除 
 */
-Route::delete('/book/{book}', function (Book $book) {
-    //
-    // dd( $book );
-    $book->delete();       //追加
-    return redirect('/');  //追加    
-});
-
+// Route::delete('/book/{book}', function (Book $book) {
+//     //
+//     // dd( $book );
+//     $book->delete();       //追加
+//     return redirect('/');  //追加    
+// });
+Route::delete('/book/{book}','BooksController@destroy');
 
 //更新画面
-Route::post('/booksedit/{books}', function(Book $books) {
-    //{books}id 値を取得 => Book $books id 値の1レコード取得
-    return view('booksedit', ['book' => $books]);
-});
+// Route::post('/booksedit/{books}', function(Book $books) {
+//     //{books}id 値を取得 => Book $books id 値の1レコード取得
+//     return view('booksedit', ['book' => $books]);
+// });
+Route::post('/booksedit/{books}','BooksController@edit');
+
 
 //更新処理
 // Route::post('/books/update', function(Request $request){
@@ -114,6 +119,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

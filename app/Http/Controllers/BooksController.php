@@ -28,7 +28,10 @@ class BooksController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $books = Book::orderBy('created_at', 'asc')->get();
+        return view('books', [
+            'books' => $books
+        ]);
     }
 
     // ...
@@ -64,6 +67,7 @@ class BooksController extends Controller
         return redirect('/');       
     }
 
+    //本の登録
     public function store(Request $request) {
         //バリデーション
         $validator = Validator::make($request->all(), [
@@ -92,5 +96,18 @@ class BooksController extends Controller
         $books->save(); 
         return redirect('/');          
 
+    }    
+
+    //本の削除
+    public function destroy(Book $book) {
+        // dd( $book );
+        $book->delete();       //追加
+        return redirect('/');  //追加            
+    }
+
+    //本の削除
+    public function edit(Book $books) {
+        //{books}id 値を取得 => Book $books id 値の1レコード取得
+        return view('booksedit', ['book' => $books]);           
     }    
 }
