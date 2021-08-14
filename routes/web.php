@@ -32,36 +32,37 @@ Route::get('contact', 'BooksController@contact');
 /**
 * 本を追加 
 */
-Route::post('/books', function (Request $request) {
-    //dd( $request );　//POSTなどのでリクエストデータがセットされている
+// Route::post('/books', function (Request $request) {
+//     //dd( $request );　//POSTなどのでリクエストデータがセットされている
 
-    //バリデーション
-    $validator = Validator::make($request->all(), [
-        'item_name' => 'required|max:255|min:3',
-        'item_number' => 'required|max:3|min:3',
-        'item_amount' => 'required|min:6',    
-        'published' => 'required',           
-    ]);
+//     //バリデーション
+//     $validator = Validator::make($request->all(), [
+//         'item_name' => 'required|max:255|min:3',
+//         'item_number' => 'required|max:3|min:3',
+//         'item_amount' => 'required|min:6',    
+//         'published' => 'required',           
+//     ]);
 
-    //バリデーション:エラー 
-    if ($validator->fails()) {
-        return redirect('/')
-            ->withInput()
-            ->withErrors($validator);
-    }
+//     //バリデーション:エラー 
+//     if ($validator->fails()) {
+//         return redirect('/')
+//             ->withInput()
+//             ->withErrors($validator);
+//     }
     
-    //以下登録処理が後で追加します！      
+//     //以下登録処理が後で追加します！      
 
 
-     // Eloquentモデル（登録処理）
-     $books = new Book;
-     $books->item_name = $request->item_name;
-     $books->item_number = $request->item_number;
-     $books->item_amount = $request->item_amount;
-     $books->published   = $request->published;
-     $books->save(); 
-     return redirect('/');   
-});
+//      // Eloquentモデル（登録処理）
+//      $books = new Book;
+//      $books->item_name = $request->item_name;
+//      $books->item_number = $request->item_number;
+//      $books->item_amount = $request->item_amount;
+//      $books->published   = $request->published;
+//      $books->save(); 
+//      return redirect('/');   
+// });
+Route::post('/books','BooksController@store');
 
 /**
 * 本を削除 
@@ -81,32 +82,32 @@ Route::post('/booksedit/{books}', function(Book $books) {
 });
 
 //更新処理
-Route::post('/books/update', function(Request $request){
-    //バリデーション
-        $validator = Validator::make($request->all(), [
-            'id' => 'required',
-            'item_name' => 'required|min:3|max:255',
-            'item_number' => 'required|min:1|max:3',
-            'item_amount' => 'required|max:6',
-            'published' => 'required',
-    ]);
-    //バリデーション:エラー
-        if ($validator->fails()) {
-            return redirect('/')
-                ->withInput()
-                ->withErrors($validator);
-    }
+// Route::post('/books/update', function(Request $request){
+//     //バリデーション
+//         $validator = Validator::make($request->all(), [
+//             'id' => 'required',
+//             'item_name' => 'required|min:3|max:255',
+//             'item_number' => 'required|min:1|max:3',
+//             'item_amount' => 'required|max:6',
+//             'published' => 'required',
+//     ]);
+//     //バリデーション:エラー
+//         if ($validator->fails()) {
+//             return redirect('/')
+//                 ->withInput()
+//                 ->withErrors($validator);
+//     }
     
-    //データ更新
-    $books = Book::find($request->id);
-    $books->item_name   = $request->item_name;
-    $books->item_number = $request->item_number;
-    $books->item_amount = $request->item_amount;
-    $books->published   = $request->published;
-    $books->save();
-    return redirect('/');
-});
-
+//     //データ更新
+//     $books = Book::find($request->id);
+//     $books->item_name   = $request->item_name;
+//     $books->item_number = $request->item_number;
+//     $books->item_amount = $request->item_amount;
+//     $books->published   = $request->published;
+//     $books->save();
+//     return redirect('/');
+// });
+Route::post('/books/update','BooksController@update');
 
 Auth::routes();
 
