@@ -4,9 +4,14 @@
     <!-- Bootstrapの定形コード… -->
     <div class="card-body">
         <div class="card-title">
-            本のタイトル
+            本の登録
         </div>
-        
+        @if (session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif        
+
         <!-- バリデーションエラーの表示に使用-->
         @include('common.errors')
         <!-- バリデーションエラーの表示に使用-->
@@ -17,6 +22,7 @@
 
             <!-- 本のタイトル -->
             <div class="form-group">
+            <label class="card-title" for="item_number">冊数</label>    
                 <div class="col-sm-6">
                     <input type="text" name="item_name" class="form-control">
                 </div>
@@ -24,13 +30,13 @@
 
             <!-- ↓課題1.1 p152↓ -->
             <div class="form-group">
-            <label class="card-title" for="item_number">冊数</label>               
+                <label class="card-title" for="item_number">冊数</label>               
                 <div class="col-sm-6">
                     <input type="text" name="item_number" class="form-control">
                 </div>
             </div>
             <div class="form-group">
-            <label class="card-title" for="item_amount">金額</label> 
+                <label class="card-title" for="item_amount">金額</label> 
                 <div class="col-sm-6">
                     <input type="text" name="item_amount" class="form-control">
                 </div>
