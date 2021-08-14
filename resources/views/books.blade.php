@@ -22,7 +22,7 @@
 
             <!-- 本のタイトル -->
             <div class="form-group">
-            <label class="card-title" for="item_number">冊数</label>    
+            <label class="card-title" for="item_name">書籍名</label>    
                 <div class="col-sm-6">
                     <input type="text" name="item_name" class="form-control">
                 </div>
