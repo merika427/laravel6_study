@@ -28,7 +28,8 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = Book::orderBy('created_at', 'asc')->get();
+        // $books = Book::orderBy('created_at', 'asc')->get();
+        $books = Book::orderBy('created_at', 'asc')->paginate(3);
         return view('books', [
             'books' => $books
         ]);
@@ -42,6 +43,7 @@ class BooksController extends Controller
 
      //更新
     public function update(Request $request) {
+
         //バリデーション
         $validator = Validator::make($request->all(), [
                 'id' => 'required',
@@ -69,12 +71,13 @@ class BooksController extends Controller
 
     //本の登録
     public function store(Request $request) {
+        // dd( $request );
         //バリデーション
         $validator = Validator::make($request->all(), [
-            'item_name' => 'required|max:255|min:3',
-            'item_number' => 'required|max:3|min:3',
-            'item_amount' => 'required|min:6',    
-            'published' => 'required',           
+            'item_name' => 'required|min:3|max:255',
+            'item_number' => 'required|min:1|max:3',
+            'item_amount' => 'required|max:6',
+            'published' => 'required',        
         ]);
 
         //バリデーション:エラー 

@@ -24,19 +24,19 @@
 
             <!-- ↓課題1.1 p152↓ -->
             <div class="form-group">
-            <label class="card-title" for="item_number">冊数</div>               
+            <label class="card-title" for="item_number">冊数</label>               
                 <div class="col-sm-6">
                     <input type="text" name="item_number" class="form-control">
                 </div>
             </div>
             <div class="form-group">
-            <label class="card-title" for="item_amount">金額</div> 
+            <label class="card-title" for="item_amount">金額</label> 
                 <div class="col-sm-6">
                     <input type="text" name="item_amount" class="form-control">
                 </div>
             </div>
             <div class="form-group">
-                <label class="card-title" for="published">本公開日</div> 
+                <label class="card-title" for="published">本公開日</label> 
                 <div class="col-sm-6">
                     <input type="date" name="published" class="form-control">
                 </div>
@@ -112,5 +112,11 @@
                 </table>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                {{ $books->links()}}
+            </div>
+       </div> 
+
     @endif
 @endsection
