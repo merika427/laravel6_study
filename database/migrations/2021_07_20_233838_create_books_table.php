@@ -20,6 +20,7 @@ class CreateBooksTable extends Migration
             $table->integer('item_number');
             $table->integer('item_amount');
             $table->datetime('published');
+            $table->string('item_img');     //Add:item_img
             $table->bigInteger('user_id'); //Add:user_id
             //--ここまで追加--           
             $table->timestamps();

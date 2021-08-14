@@ -17,7 +17,7 @@
         <!-- バリデーションエラーの表示に使用-->
 
         <!-- 本登録フォーム -->
-        <form action="{{ url('books') }}" method="POST" class="form-horizontal">
+        <form action="{{ url('books') }}"　enctype="multipart/form-data" method="POST" class="form-horizontal">
             @csrf
 
             <!-- 本のタイトル -->
@@ -49,6 +49,11 @@
             </div>                             
             <!-- ↑課題1.1 p152↑ -->
 
+            <div class="col-sm-6">
+                <label>画像</label>
+                <input type="file" name="item_img">
+            </div>
+
             <!-- 本 登録ボタン -->
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
@@ -57,6 +62,8 @@
                     </button>
                 </div>
             </div>
+
+           
         </form>
     </div>
     <!-- Book: 既に登録されてる本のリスト -->
@@ -77,6 +84,7 @@
                                 <!-- 本タイトル -->
                                 <td class="table-text">
                                     <div>{{ $book->item_name }}</div>
+                                    <div> <img src="upload/{{$book->item_img}}" width="100"></div>
                                 </td>
                                 <!-- ↓課題1.1 p152↓ -->
                                 <td class="table-text">

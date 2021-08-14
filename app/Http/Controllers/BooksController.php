@@ -89,7 +89,19 @@ class BooksController extends Controller
                 ->withErrors($validator);
         }
         
-        //以下登録処理が後で追加します！      
+        //以下登録処理が後で追加します！    
+
+        # データ登録処理の上に記述しておくこと
+        $file = $request->file('item_img'); //file取得
+        if( !empty($file) ){                //fileが空かチェック
+            $filename = $file->getClientOriginalName();   //ファイル名を取得
+            $move = $file->move('../public/upload/',$filename);  //ファイルを移動：パスが“./upload/”の場合もあるCloud9
+            print_r($move);
+        }else{
+            $filename = "";
+        }
+
+
 
 
         // Eloquentモデル（登録処理）
@@ -99,6 +111,7 @@ class BooksController extends Controller
         $books->item_number = $request->item_number;
         $books->item_amount = $request->item_amount;
         $books->published   = $request->published;
+        $books->item_img = $filename;
         $books->save(); 
         return redirect('/')->with('message', '本登録が完了しました');        
 
