@@ -116,9 +116,22 @@ Route::post('/books/update','BooksController@update');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'BooksController@index')->name('home');
 
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+
+
+#**************************************************
+# * Route::groupを使ったログイン認証
+# * 「コンストラクタ」か「Route::group」のどちらかだけの記述にします。
+#**************************************************
+// Route::group(['middleware' => 'auth'], function () {
+//     //welcomeページを表示
+//     Route::get("/",function(){
+//       return view("welcome");
+//     });
+ 
+//  });

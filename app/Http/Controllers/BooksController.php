@@ -29,7 +29,8 @@ class BooksController extends Controller
     public function index()
     {
         // $books = Book::orderBy('created_at', 'asc')->get();
-        $books = Book::orderBy('created_at', 'asc')->paginate(3);
+        // $books = Book::orderBy('created_at', 'asc')->paginate(3);
+        $books = Book::where('user_id',Auth::user()->id)->orderBy('created_at', 'asc')->paginate(3);
         return view('books', [
             'books' => $books
         ]);
@@ -59,8 +60,9 @@ class BooksController extends Controller
                     ->withErrors($validator);
         }
         
-        //データ更新
-        $books = Book::find($request->id);
+        // //データ更新
+        // $books = Book::find($request->id);
+        $books = Book::where('user_id',Auth::user()->id)->find($request->id);
         $books->item_name   = $request->item_name;
         $books->item_number = $request->item_number;
         $books->item_amount = $request->item_amount;
@@ -92,6 +94,7 @@ class BooksController extends Controller
 
         // Eloquentモデル（登録処理）
         $books = new Book;
+        $books->user_id  = Auth::user()->id; //追加のコード
         $books->item_name = $request->item_name;
         $books->item_number = $request->item_number;
         $books->item_amount = $request->item_amount;
@@ -108,9 +111,15 @@ class BooksController extends Controller
         return redirect('/');  //追加            
     }
 
-    //本の削除
-    public function edit(Book $books) {
-        //{books}id 値を取得 => Book $books id 値の1レコード取得
-        return view('booksedit', ['book' => $books]);           
+    //本の編集
+    // public function edit(Book $books) {
+    //     //{books}id 値を取得 => Book $books id 値の1レコード取得
+    //     return view('booksedit', ['book' => $books]);           
+    // } 
+    public function edit($book_id){
+        $books = Book::where('user_id',Auth::user()->id)->find($book_id);
+        return view('booksedit', [
+            'book' => $books
+        ]);
     }    
 }
